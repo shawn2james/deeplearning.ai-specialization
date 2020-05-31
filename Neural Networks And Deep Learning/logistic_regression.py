@@ -89,10 +89,10 @@ class LogisticRegressor():
         Returns the prediction of the model on the given test data
         """
         y_test_pred = self.predict_proba(X_test)
-        return y_test_pred > 0.5
+        return (y_test_pred > 0.5).astype('int32')
     
     def accuracy(self, y_true, y_pred):
         """
         returns the accuracy in percentage using sklearn.metrics.accuracy_score()
         """
-        return str(accuracy_score(y_true, y_pred)*100)+"%"
+        return accuracy_score(y_true, y_pred)
