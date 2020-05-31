@@ -38,7 +38,6 @@ class LogisticRegressor():
         """
         Z = np.dot(self.W.T, self.X)+ self.b
         A = sigmoid(Z)
-#         print("Z=", Z.shape, "A=", A.shape)
 
         return (Z, A)
 
@@ -46,7 +45,6 @@ class LogisticRegressor():
         dZ = A.T-y
         db = (1/self.m)*np.sum(dZ)
         dW = (1/self.m)*np.dot(self.X, dZ)
-#         print("dZ=", dZ.shape, "db=", db, "dW=", dW.shape)
         return db, dW
 
     def cost_function(self, A, y):
@@ -60,8 +58,6 @@ class LogisticRegressor():
             db, dW = self.linear_backward(A, self.y)
             self.W = self.W - self.alpha*dW
             self.b = self.b - self.alpha*db
-#             print("dW", dW.shape, "db=", db)
-#             print("W=", self.W.shape, "b=", self.b.shape)
 
             if i%100==0 and self.print_cost:
                     print("Cost Function at iteration", i, "=", cost[0])
