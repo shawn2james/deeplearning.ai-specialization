@@ -42,16 +42,27 @@ class LogisticRegressor():
         return (Z, A)
 
     def linear_backward(self, A, y):
+        """
+        Executes backpropagation and returns the derivatives of weights and bias
+        which is used for gradient descent update
+        """
         dZ = A.T-y
         db = (1/self.m)*np.sum(dZ)
         dW = (1/self.m)*np.dot(self.X, dZ)
         return db, dW
 
     def cost_function(self, A, y):
+        """
+        calculates the cost function of the activations 
+        """
         J = np.sum(y*np.log(A))+(1-y)*np.log(1-A)
         return -J[0]/self.m
         
     def learn(self):
+        """
+        Learning the data and applying forward and backward propagations
+        for the specified no. of iterations
+        """
         for i in range(self.n_iters):
             Z, A = self.linear_activation_forward()
             cost = self.cost_function(A, self.y)
@@ -63,6 +74,9 @@ class LogisticRegressor():
                     print("Cost Function at iteration", i, "=", cost[0])
             
     def predict_proba(self, X_test):
+        """
+        Returns the probability that each training example belongs to class 1  
+        """
         y_test_pred = []
         for i in X_test.T:
             test_pred = sigmoid(np.dot(self.W.T, i)+self.b)
@@ -71,8 +85,14 @@ class LogisticRegressor():
         return np.array(y_test_pred)
     
     def predict(self, X_test):
+        """
+        Returns the prediction of the model on the given test data
+        """
         y_test_pred = self.predict_proba(X_test)
         return y_test_pred > 0.5
     
     def accuracy(self, y_true, y_pred):
+        """
+        returns the accuracy in percentage using sklearn.metrics.accuracy_score()
+        """
         return str(accuracy_score(y_true, y_pred)*100)+"%"
