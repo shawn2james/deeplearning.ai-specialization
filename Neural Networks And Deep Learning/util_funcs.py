@@ -6,6 +6,3 @@ def sigmoid(X):
 def relu(X):
     return np.maximum(X, 0)
 
-def test():
-    print("lskdjflskjf")
-
